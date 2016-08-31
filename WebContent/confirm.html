@@ -58,20 +58,21 @@
 
    <div class="container">
 
-      <form class="form-Confirm">
+     <form id="tranfer-from" method="get" action="complete.html">
         <h2 class="form-Confirm-heading">Confirm To</h2>
         <label for="inputName">Name: </label>
-        <input type="text" id="txtName" class="form-control" value="ประธาน ด่านสกุลเจริญกิจ" required disabled="disabled"></br></br>
+        <input type="text" id="txtName" name="txtName" class="form-control" value="ประธาน ด่านสกุลเจริญกิจ" required readonly="readonly"></br></br>
       
         <label for="inputAccountNo." >Account No.: </label>
-        <input type="text" id="txtAcc" class="form-control" value="8472124235" required disabled="disabled"></br></br>
+        <input type="text" id="txtAcc" name="txtAcc" class="form-control" value="8472124235" required readonly="readonly"></br></br>
         
         <label for="inputAmount" >Amount: </label>
-        <input type="text" id="txtAmount" class="form-control" value="20000.00" required disabled="disabled"></br></br>
+        <input type="text" id="txtAmount" name="txtAmount" class="form-control" value="20000.00" required readonly="readonly"></br></br>
 
         <label for="inputFee" >Fee: </label>
-        <input type="text" id="txtFee" class="form-control" value="0.00" required disabled="disabled"> </br></br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button0.00
+        <input type="text" id="txtFee" name="txtFee" class="form-control" value="0.00" required readonly="readonly"> </br></br>
+        <button type="submit" id="confirm_transfer" class="btn btn-default">Confirm</button>
+        
       </form>
 
     </div> <!-- /container -->
@@ -82,17 +83,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <script type="text/javascript">
-        $("form").submit(function(){
-            var amount_to = $( "#amount_to" ).val();
-            if(amount_to <1 || amount_to > 20000){
-                alert('จำนวนเงินไม่ถูกต้อง');
-                return false;
-            }
-            
-        });
-    </script>
 
+   
 </body>
 
 </html>
