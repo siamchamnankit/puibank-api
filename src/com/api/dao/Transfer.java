@@ -1,13 +1,37 @@
 package com.api.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Transfer {
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name="transfer", urlPatterns="/transfer")
+public class Transfer extends HttpServlet {
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2720244577882784292L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doGet(req, resp);
+	}
+
+
+
 	public void updateTransfer(String accFrom, String accTo, double amount, double fee){
 		
 		Connection connect = null;
@@ -23,24 +47,22 @@ public class Transfer {
 				System.out.println("Database Connected.");
 				
 				//Update Acc To
-				String sql = ("SELECT * FROM MasterAccount m where m.AccountNo = ?");
+				String sql = ("update MasterAccount m set m.amount = ?" +
+						" where m.AccountNo=?");
 				PreparedStatement ps = connect.prepareStatement(sql);
-				ps.setString(1, accTo);
-				ResultSet rs = ps.executeQuery();
-				try {
-					if (rs.next()) {
-//						acc = rs.getString("AccountNo");
-//						name = rs.getString("Name");
-//						amount = rs.getDouble("Amount");
-//						
-//						result.setAccountNo(acc);
-//						result.setName(name);
-//						result.setAmount(amount);
-					}
-//					System.out.println(acc);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				ps.setDouble(1, amount);
+				ps.setString(2, accTo);
+				ps.executeUpdate();
+				connect.commit();
+				
+				//Update Acc From
+//				String sql2 = ("update MasterAccount m set m.amount = m.amount-?" +
+//						" where m.AccountNo=?");
+//				PreparedStatement ps2 = connect.prepareStatement(sql);
+//				ps2.setDouble(1, amount+fee);
+//				ps2.setString(2, accFrom);
+//				ps2.executeUpdate();
+				
 			} else {
 				System.out.println("Database Connect Failed.");
 			}
